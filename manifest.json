@@ -1,0 +1,11 @@
+{
+	"id": "nexus",
+	"name": "Nexus",
+	"version": "0.1.0",
+	"minAppVersion": "0.15.0",
+	"description": "Automatically discover and visualize the hidden connections between your notes using machine learning.",
+	"author": "Ammon Kunzler",
+	"authorUrl": "https://ammonkunzler.com",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}
