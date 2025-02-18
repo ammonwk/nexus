@@ -1,8 +1,101 @@
-/*
+/* Masonry View Styles */
+.workspace-leaf-content[data-type="masonry-view"] {
+    overflow-y: auto;  /* Enable scrolling */
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.masonry-grid {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: relative; /* Add this */
+}
 
-If your plugin does not need CSS, delete this file.
+.note-card {
+    position: absolute; /* Add this */
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+}
 
-*/
+.note-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.note-card .preview {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Network View Styles */
+.network-view svg {
+    width: 100%;
+    height: 100%;
+}
+
+.network-view .node circle {
+    fill: var(--interactive-accent);
+}
+
+.network-view .node text {
+    font-size: 12px;
+    fill: var(--text-normal);
+}
+
+.network-view .link {
+    stroke: var(--background-modifier-border);
+}
+
+.network-view .note-box {
+    fill: var(--background-primary);
+    stroke: var(--background-modifier-border);
+    stroke-width: 1px;
+}
+
+.network-view .note-title {
+    font-weight: bold;
+    font-size: 14px;
+    fill: var(--text-normal);
+}
+
+.network-view .note-content {
+    font-size: 12px;
+    fill: var(--text-muted);
+}
+
+.network-view .link {
+    stroke-opacity: 0.6;
+}
+
+.network-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: var(--background-primary);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--background-modifier-border);
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.slider-container label {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.slider-container input[type="range"] {
+    width: 200px;
+}
+
+.threshold-value {
+    font-weight: bold;
+}

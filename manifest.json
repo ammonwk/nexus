@@ -7,5 +7,6 @@
 	"author": "Ammon Kunzler",
 	"authorUrl": "https://ammonkunzler.com",
 	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+	"isDesktopOnly": false,
+	"css": "styles.css"
 }
