@@ -14,7 +14,7 @@ export class SimilarityService {
         return this.cosineSimilarity(embedding1, embedding2);
     }
 
-    private async getEmbedding(text: string): Promise<Float32Array> {
+    public async getEmbedding(text: string): Promise<Float32Array> {
         if (!this.embeddings.has(text)) {
             const embedding = await this.embeddingService.embedText(text);
             this.embeddings.set(text, embedding);

@@ -1,17 +1,24 @@
 import { Plugin, WorkspaceLeaf, addIcon } from 'obsidian';
 import { MasonryView } from './views/masonry-view';
 import { NetworkView } from './views/network-view';
+import { SemanticSearchView } from './views/semantic-search-view';
 import { EmbeddingService } from './services/embedding';
 import { SimilarityService } from './services/similarity';
+import { ClusterService } from './services/cluster';
 import './styles.css';
 
 export default class SemanticLayoutPlugin extends Plugin {
     private embeddingService: EmbeddingService;
     private similarityService: SimilarityService;
+    private clusterService: ClusterService;
 
     async onload() {
         this.embeddingService = new EmbeddingService();
         this.similarityService = new SimilarityService(this.embeddingService);
+        this.clusterService = new ClusterService(this.similarityService);
+        
+        // Set the app instance in the cluster service
+        this.clusterService.setApp(this.app);
 
         try {
             await this.embeddingService.initialize();
@@ -30,6 +37,11 @@ export default class SemanticLayoutPlugin extends Plugin {
             'network-view',
             (leaf: WorkspaceLeaf) => new NetworkView(leaf, this.similarityService)
         );
+        
+        this.registerView(
+            'semantic-search-view',
+            (leaf: WorkspaceLeaf) => new SemanticSearchView(leaf, this.similarityService)
+        );
 
         // Add commands
         this.addCommand({
@@ -43,6 +55,12 @@ export default class SemanticLayoutPlugin extends Plugin {
             name: 'Open Network View',
             callback: () => this.activateView('network-view'),
         });
+        
+        this.addCommand({
+            id: 'open-semantic-search-view',
+            name: 'Open Semantic Search',
+            callback: () => this.activateView('semantic-search-view'),
+        });
 
         // Add ribbon icons
         this.addRibbonIcon('layout-grid', 'Masonry View', () => {
@@ -51,6 +69,10 @@ export default class SemanticLayoutPlugin extends Plugin {
 
         this.addRibbonIcon('network', 'Network View', () => {
             this.activateView('network-view');
+        });
+        
+        this.addRibbonIcon('search', 'Semantic Search', () => {
+            this.activateView('semantic-search-view');
         });
     }
 
@@ -75,5 +97,6 @@ export default class SemanticLayoutPlugin extends Plugin {
     onunload() {
         this.app.workspace.detachLeavesOfType('masonry-view');
         this.app.workspace.detachLeavesOfType('network-view');
+        this.app.workspace.detachLeavesOfType('semantic-search-view');
     }
 }
